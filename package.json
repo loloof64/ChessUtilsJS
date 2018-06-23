@@ -1,0 +1,16 @@
+{
+  "name": "chess-utils",
+  "version": "0.0.2",
+  "description": "A chess library for Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha dist/test/"
+  },
+  "keywords": [
+    "chess",
+    "library",
+    "javascript"
+  ],
+  "author": "Laurent Bernabe <laurent.bernabe@gmail.com>",
+  "license": "EPL-2.0"
+}
