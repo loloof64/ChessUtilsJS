@@ -4,7 +4,11 @@
   "description": "A chess library for Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha dist/test/"
+    "setup": "npm install",
+    "clean": "shx rm -Rf dist/",
+    "cleanDependencies": "shx rm -Rf node_modules/",
+    "build": "babel src -d dist/src && babel test -d dist/test",
+    "test": "mocha --require babel-polyfill --require babel-register dist/test/"
   },
   "keywords": [
     "chess",
@@ -12,5 +16,14 @@
     "javascript"
   ],
   "author": "Laurent Bernabe <laurent.bernabe@gmail.com>",
-  "license": "EPL-2.0"
+  "license": "EPL-2.0",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "shx": "^0.3.0"
+  }
 }
