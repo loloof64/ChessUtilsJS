@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "setup": "npm install",
-    "clean": "shx rm -Rf dist/",
-    "cleanDependencies": "shx rm -Rf node_modules/",
+    "clean": "rm -Rf dist/",
+    "cleanDependencies": "rm -Rf node_modules/",
     "build": "babel src -d dist/src && babel test -d dist/test",
     "test": "mocha --require babel-polyfill --require babel-register dist/test/"
   },
@@ -23,7 +23,6 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "shx": "^0.3.0"
+    "mocha": "^5.2.0"
   }
 }
