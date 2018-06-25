@@ -8,7 +8,8 @@
     "clean": "rm -Rf dist/",
     "cleanDependencies": "rm -Rf node_modules/",
     "build": "babel src -d dist/src && babel test -d dist/test",
-    "test": "mocha --require babel-polyfill --require babel-register dist/test/"
+    "test": "mocha --require babel-polyfill --require babel-register dist/test/",
+    "uglify": "uglifyjs-folder dist/src/core -x .js -o index.js"
   },
   "keywords": [
     "chess",
@@ -23,6 +24,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "uglifyjs-folder": "^1.5.1"
   }
 }

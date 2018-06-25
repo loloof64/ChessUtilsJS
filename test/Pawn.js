@@ -11,8 +11,8 @@ describe('A pawn', function() {
     });
 
     it('should return "p" if is black', function() {
-        testedPiece = new Pawn(true);
-        assert.equal(testedPiece.toFen(), 'p');
-      });
+      testedPiece = new Pawn(true);
+      assert.equal(testedPiece.toFen(), 'p');
+    });
   });
 });
