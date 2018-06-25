@@ -49,7 +49,7 @@ describe('A position', function(){
             assert.strictEqual(position.canDoWhiteLongCastle, false);
             assert.strictEqual(position.canDoBlackShortCastle, false);
             assert.strictEqual(position.canDoBlackLongCastle, false);
-            assert.strictEqual(position.enPassantCell, undefined);
+            assert.deepEqual(position.enPassantCell, undefined);
             assert.strictEqual(position.halfMovesCountForNullity, 9);
             assert.strictEqual(position.moveNumber, 15);
         });
@@ -62,7 +62,7 @@ describe('A position', function(){
             assert.strictEqual(position.canDoWhiteLongCastle, true);
             assert.strictEqual(position.canDoBlackShortCastle, true);
             assert.strictEqual(position.canDoBlackLongCastle, true);
-            assert.strictEqual(position.enPassantCell, undefined);
+            assert.deepEqual(position.enPassantCell, undefined);
             assert.strictEqual(position.halfMovesCountForNullity, 1);
             assert.strictEqual(position.moveNumber, 2);
         });
@@ -75,7 +75,7 @@ describe('A position', function(){
             assert.strictEqual(position.canDoWhiteLongCastle, false);
             assert.strictEqual(position.canDoBlackShortCastle, true);
             assert.strictEqual(position.canDoBlackLongCastle, true);
-            assert.strictEqual(position.enPassantCell, undefined);
+            assert.deepEqual(position.enPassantCell, undefined);
             assert.strictEqual(position.halfMovesCountForNullity, 1);
             assert.strictEqual(position.moveNumber, 4);
         });
@@ -88,9 +88,22 @@ describe('A position', function(){
             assert.strictEqual(position.canDoWhiteLongCastle, true);
             assert.strictEqual(position.canDoBlackShortCastle, true);
             assert.strictEqual(position.canDoBlackLongCastle, true);
-            assert.strictEqual(position.enPassantCell, undefined);
+            assert.deepEqual(position.enPassantCell, undefined);
             assert.strictEqual(position.halfMovesCountForNullity, 2);
             assert.strictEqual(position.moveNumber, 2);
-        })
+        });
+
+        it("Position 5 (enPassant cell - whiteTurn) : rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2", function(){
+            const position = Position.fromFEN('rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2');
+            assert.strictEqual(collapsePositionPieces(position), 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR');
+            assert.strictEqual(position.blackTurn, false);
+            assert.strictEqual(position.canDoWhiteShortCastle, true);
+            assert.strictEqual(position.canDoWhiteLongCastle, true);
+            assert.strictEqual(position.canDoBlackShortCastle, true);
+            assert.strictEqual(position.canDoBlackLongCastle, true);
+            assert.deepEqual(position.enPassantCell, {file: 4, rank: 5});
+            assert.strictEqual(position.halfMovesCountForNullity, 0);
+            assert.strictEqual(position.moveNumber, 2);
+        });
     });
 });

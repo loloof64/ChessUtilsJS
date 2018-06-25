@@ -46,7 +46,10 @@ export default class Position {
         const whiteLongCastle = fenParts[2].includes("Q");
         const blackShortCastle = fenParts[2].includes("k");
         const blackLongCastle = fenParts[2].includes("q");
-        const enPassantCell = undefined;
+        const enPassantCell = fenParts[3] === '-' ? undefined : {
+            file: fenParts[3].charCodeAt(0) - 'a'.charCodeAt(0),
+            rank: fenParts[3].charCodeAt(1) - '1'.charCodeAt(0)
+        };
         const halfMovesCountForNullity = parseInt(fenParts[4]);
         const moveNumber = parseInt(fenParts[5]);
         return new Position(
