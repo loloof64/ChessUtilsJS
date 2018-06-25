@@ -105,5 +105,18 @@ describe('A position', function(){
             assert.strictEqual(position.halfMovesCountForNullity, 0);
             assert.strictEqual(position.moveNumber, 2);
         });
+
+        it("Position 6 (enPassant cell - blackTurn) : rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1", function(){
+            const position = Position.fromFEN('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1');
+            assert.strictEqual(collapsePositionPieces(position), 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR');
+            assert.strictEqual(position.blackTurn, true);
+            assert.strictEqual(position.canDoWhiteShortCastle, true);
+            assert.strictEqual(position.canDoWhiteLongCastle, true);
+            assert.strictEqual(position.canDoBlackShortCastle, true);
+            assert.strictEqual(position.canDoBlackLongCastle, true);
+            assert.deepEqual(position.enPassantCell, {file: 4, rank: 2});
+            assert.strictEqual(position.halfMovesCountForNullity, 0);
+            assert.strictEqual(position.moveNumber, 1);
+        });
     });
 });
