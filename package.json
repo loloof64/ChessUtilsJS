@@ -9,7 +9,8 @@
     "cleanDependencies": "rm -Rf node_modules/",
     "build": "babel src -d dist/src && babel test -d dist/test",
     "test": "mocha --require babel-polyfill --require babel-register dist/test/",
-    "uglify": "uglifyjs-folder dist/src/core -x .js -o index.js"
+    "uglify": "uglifyjs-folder dist/src/core -x .js -o index.js",
+    "localBuild": "npm run clean && npm run build && npm run test && npm run uglify"
   },
   "keywords": [
     "chess",

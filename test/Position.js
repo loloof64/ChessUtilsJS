@@ -54,7 +54,20 @@ describe('A position', function(){
             assert.strictEqual(position.moveNumber, 15);
         });
 
-        it("Position 2 (with castle rights) : r1bqkbnr/pp2pppp/2np4/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 1 4", function(){
+        it("Position 2 (white turn and all castle rights) : rnbqkb1r/pppppppp/5n2/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2", function() {
+            const position = Position.fromFEN('rnbqkb1r/pppppppp/5n2/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2');
+            assert.strictEqual(collapsePositionPieces(position), 'rnbqkb1r/pppppppp/5n2/8/4P3/8/PPPP1PPP/RNBQKBNR');
+            assert.strictEqual(position.blackTurn, false);
+            assert.strictEqual(position.canDoWhiteShortCastle, true);
+            assert.strictEqual(position.canDoWhiteLongCastle, true);
+            assert.strictEqual(position.canDoBlackShortCastle, true);
+            assert.strictEqual(position.canDoBlackLongCastle, true);
+            assert.strictEqual(position.enPassantCell, undefined);
+            assert.strictEqual(position.halfMovesCountForNullity, 1);
+            assert.strictEqual(position.moveNumber, 2);
+        });
+
+        it("Position 3 (castle rights) : r1bqkbnr/pp2pppp/2np4/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 1 4", function(){
             const position = Position.fromFEN('r1bqkbnr/pp2pppp/2np4/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 1 4');
             assert.strictEqual(collapsePositionPieces(position), 'r1bqkbnr/pp2pppp/2np4/1Bp5/4P3/5N2/PPPP1PPP/RNBQ1RK1');
             assert.strictEqual(position.blackTurn, true);
@@ -66,5 +79,18 @@ describe('A position', function(){
             assert.strictEqual(position.halfMovesCountForNullity, 1);
             assert.strictEqual(position.moveNumber, 4);
         });
+
+        it("Position 4 (more complex castle rights) : rnbqkb1r/pppppppp/5n2/8/7P/7R/PPPPPPP1/RNBQKBN1 b Qkq - 2 2", function(){
+            const position = Position.fromFEN('rnbqkb1r/pppppppp/5n2/8/7P/7R/PPPPPPP1/RNBQKBN1 b Qkq - 2 2');
+            assert.strictEqual(collapsePositionPieces(position), 'rnbqkb1r/pppppppp/5n2/8/7P/7R/PPPPPPP1/RNBQKBN1');
+            assert.strictEqual(position.blackTurn, true);
+            assert.strictEqual(position.canDoWhiteShortCastle, false);
+            assert.strictEqual(position.canDoWhiteLongCastle, true);
+            assert.strictEqual(position.canDoBlackShortCastle, true);
+            assert.strictEqual(position.canDoBlackLongCastle, true);
+            assert.strictEqual(position.enPassantCell, undefined);
+            assert.strictEqual(position.halfMovesCountForNullity, 2);
+            assert.strictEqual(position.moveNumber, 2);
+        })
     });
 });

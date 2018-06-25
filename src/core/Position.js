@@ -41,7 +41,7 @@ export default class Position {
             })
         }).reverse();
 
-        const blackTurn = true;
+        const blackTurn = fenParts[1] !== 'w';
         const whiteShortCastle = fenParts[2].includes("K");
         const whiteLongCastle = fenParts[2].includes("Q");
         const blackShortCastle = fenParts[2].includes("k");
