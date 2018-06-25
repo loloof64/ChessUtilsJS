@@ -42,10 +42,10 @@ export default class Position {
         }).reverse();
 
         const blackTurn = true;
-        const whiteShortCastle = false;
-        const whiteLongCastle = false;
-        const blackShortCastle = false;
-        const blackLongCastle = false;
+        const whiteShortCastle = fenParts[2].includes("K");
+        const whiteLongCastle = fenParts[2].includes("Q");
+        const blackShortCastle = fenParts[2].includes("k");
+        const blackLongCastle = fenParts[2].includes("q");
         const enPassantCell = undefined;
         const halfMovesCountForNullity = parseInt(fenParts[4]);
         const moveNumber = parseInt(fenParts[5]);

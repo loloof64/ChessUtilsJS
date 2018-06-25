@@ -1,6 +1,7 @@
 dist/
 node_module/
 src/
+.vscode/
 .babelrc
 .gitignore
 .travis.yml
