@@ -28,7 +28,5 @@
     "mocha": "^5.2.0",
     "uglifyjs-folder": "^1.5.1"
   },
-  "dependencies": {
-    "underscore": "^1.9.1"
-  }
+  "dependencies": {}
 }

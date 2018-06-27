@@ -1,4 +1,3 @@
-import * as _ from 'underscore';
 import { Piece } from './pieces';
 
 export default class Position {
@@ -26,17 +25,19 @@ export default class Position {
         }
 
         function repeatedChar(inputChar, times) {
-            const arr = new Array(times);
-            return _.reduce(arr, (current, newElem) => current + inputChar, "");
+            const arr = new Array(times).fill("");
+            return arr.reduce((accum, newElem) => {
+                return accum + inputChar;
+            }, "");
         }
 
         const fenParts = fenString.split(" ");
-        const boardPartWithUnderscores = _.reduce(fenParts[0], (currentValue, newElem) => {
+        const boardPartWithUnderscores = fenParts[0].split("").reduce((currentValue, newElem) => {
             if (isDigit(newElem)) return currentValue + repeatedChar('_', parseInt(newElem));
             return currentValue + newElem;
         }, "");
-        const piecesArray = _.map(boardPartWithUnderscores.split("/"), (currentRankValue, currentRankIndex) => {
-            return _.map(currentRankValue, (currentElement, currentFileIndex) => {
+        const piecesArray = boardPartWithUnderscores.split("/").map((currentRankValue, currentRankIndex) => {
+            return currentRankValue.split("").map((currentElement, currentFileIndex) => {
                 return Piece.fromFEN(currentElement);
             })
         }).reverse();

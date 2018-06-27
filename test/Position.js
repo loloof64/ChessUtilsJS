@@ -1,24 +1,22 @@
 import * as assert from 'assert';
 import Position from '../src/core/Position';
 
-import * as _ from 'underscore';
-
 /**
  * Gets a string representation of the position, compressed like in the FEN notation.
  * @param {Position} position 
  */
 function collapsePositionPieces(position) {
-    const reprWithHolesAsUnderscores = _.map([7,6,5,4,3,2,1,0], (rankIndex) => {
-        return _.map([0,1,2,3,4,5,6,7], (fileIndex) => {
+    const reprWithHolesAsUnderscores = [7,6,5,4,3,2,1,0].map((rankIndex) => {
+        return [0,1,2,3,4,5,6,7].map((fileIndex) => {
             const piece = position.getPieceAt({file: fileIndex, rank: rankIndex});
             const pieceFEN = piece ? piece.toFEN() : '_';
             return pieceFEN;
         }).join('');
     }).join('/');
 
-    const reprWithHolesAsNumbers = _.map(reprWithHolesAsUnderscores.split("/"), (currLine) => {
+    const reprWithHolesAsNumbers = reprWithHolesAsUnderscores.split("/").map((currLine) => {
             let holesCount = 0;
-            const transformedLine = _.reduce(currLine, (memo, currChar) => {
+            const transformedLine = currLine.split("").reduce((memo, currChar) => {
                 if (currChar === '_') {
                     holesCount += 1;
                     return memo;
