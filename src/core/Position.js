@@ -112,9 +112,48 @@ export default class Position {
     /**
      * 
      * @param {Object} cell - an object with file and rank keys as instances of Number.
-     * @returns undefined if no piece at the given cell, otherwise the piece. 
+     * @returns '-' if no piece at the given cell, otherwise the piece. 
      */
     getPieceAt(cell) {
         return this._piecesArray[cell.rank][cell.file];
+    }
+
+    toFEN() {
+        function undescoresToNumbers(inputStr){
+            let underscoresAccum = 0;
+            const output = inputStr.split("").reduce((accum, currentElem) => {
+                if (currentElem === '_') {
+                    underscoresAccum += 1;
+                    return accum;
+                }
+                else if (underscoresAccum > 0){
+                    const newValue = accum + underscoresAccum + currentElem;
+                    underscoresAccum = 0;
+                    return newValue;
+                }
+                else {
+                    underscoresAccum = 0;
+                    return accum + currentElem;
+                }
+            }, "");
+            return output + (underscoresAccum > 0 ? ("" + underscoresAccum) : "");
+        }
+
+        const boardStringRepr = this._piecesArray.map((currentLine) => {
+            return currentLine.map((currentElem) => {
+                return currentElem  === '_' ? currentElem : currentElem.toFEN();
+            }).join("");
+        }).map((currentLine) => undescoresToNumbers(currentLine)).reverse().join("/");
+
+        const turnStr = this._blackTurn ? "b" : "w";
+        let castlesStr = `${this._whiteShortCastle ? "K" : ""}${this._whiteLongCastle ? "Q" : ""}${this._blackShortCastle ? "k" : ""}${this._blackLongCastle ? "q" : ""}`;
+        if (castlesStr === "") castlesStr = "-";
+
+        const enPassantCellStr = this._enPassantCell ? `${String.fromCharCode('a'.charCodeAt(0) + this._enPassantCell.file)}${String.fromCharCode('1'.charCodeAt(0) + this._enPassantCell.rank)}` : "-";
+
+        const halfMovesCountForNullityStr = this._halfMovesCountForNullity.toString();
+        const moveNumberStr = this._moveNumber.toString();
+
+        return `${boardStringRepr} ${turnStr} ${castlesStr} ${enPassantCellStr} ${halfMovesCountForNullityStr} ${moveNumberStr}`;
     }
 }
